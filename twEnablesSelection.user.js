@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name            twEnablesSelection
 // @namespace       http://d.hatena.ne.jp/furyu-tei
-// @version         0.1.0.0
+// @version         0.1.0.1
 // @include         http://twitter.com/*
 // @include         https://twitter.com/*
 // @description     enables selection of text on Twitter
@@ -16,7 +16,7 @@ Copyright (c) 2014 furyu <furyutei@gmail.com>
 
 var main = function(w, d){
     var DEBUG = false;
-    var TWEET_TEXT_ONLY = false;
+    var TWEET_TEXT_ONLY = true;
     var SUPPRESS_FORCE_SCROLLING = true;
     
     var log = function(object) {
@@ -59,7 +59,7 @@ var main = function(w, d){
     };
     
     var override = function(event){
-        log('** mouseup event **');
+        log('** mouseup event ** class='+$(event.target).attr('class'));
         if ((TWEET_TEXT_ONLY && !$(event.target).hasClass('js-tweet-text')) || !get_selected_text()) return;
         
         $('div[role="main"], div#page-container').each(function(){
