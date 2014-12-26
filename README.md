@@ -14,3 +14,12 @@ Twitterのテキストを選択（コピー）可能なようにするスクリ�
 - 画像やリプライを含む等して縦に長い個別ツイート画面で不正なスクロールが発生(下にスクロールしようとしても上に戻ってしまう)  
 
 公式で対応されたら無意味となってしまう、はかないスクリプトです。  
+
+
+■ インストール方法
+---
+[Greasemonkey](https://addons.mozilla.org/ja/firefox/addon/greasemonkey/)を入れたFirefox、もしくは[Tampermonkey](https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo?hl=ja)を入れたGoogle Chromeにて、  
+
+> [twEnablesSelection.user.js](https://github.com/furyutei/twEnablesSelection/raw/master/twEnablesSelection.user.js)  
+
+をクリックし、指示に従ってインストール。  
