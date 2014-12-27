@@ -1,23 +1,27 @@
 // ==UserScript==
 // @name            twEnablesSelection
 // @namespace       http://d.hatena.ne.jp/furyu-tei
-// @version         0.1.0.2
+// @author          furyu
+// @version         0.1.0.3
 // @include         http://twitter.com/*
 // @include         https://twitter.com/*
 // @description     enables selection of text on Twitter
 // ==/UserScript==
 /*
 The MIT License (MIT)
-
 Copyright (c) 2014 furyu <furyutei@gmail.com>
+https://github.com/furyutei/twEnablesSelection
 */
 
 (function(w, d){
 
 var main = function(w, d){
     var DEBUG = false;
-    var TWEET_TEXT_ONLY = true;
+    
     var SUPPRESS_FORCE_SCROLLING = true;
+    var OVERRIDE_MOUSE_OPERATION = true;
+    
+    var TWEET_TEXT_ONLY = true;
     
     var log = function(object) {
         if (!DEBUG) return;
@@ -88,7 +92,7 @@ var main = function(w, d){
             setTimeout(bind_handlers, 100);
         });
     };
-    $(w).mouseup(override);
+    if (OVERRIDE_MOUSE_OPERATION) $(w).mouseup(override);
 
 }   //  end of main()
 

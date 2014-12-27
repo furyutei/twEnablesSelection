@@ -23,3 +23,9 @@ Twitterのテキストを選択（コピー）可能なようにするスクリ�
 > [twEnablesSelection.user.js](https://github.com/furyutei/twEnablesSelection/raw/master/twEnablesSelection.user.js)  
 
 をクリックし、指示に従ってインストール。  
+
+
+■ 関連記事
+---
+- [Twitterからのクリスマスプレゼントが酷かった件 - 風柳メモ](http://d.hatena.ne.jp/furyu-tei/20141226/1419588150)  
+- [Google ChromeへのTampermonkeyのインストールと基本的な使い方 - 風柳メモ](http://d.hatena.ne.jp/furyu-tei/20141227/1419609930)  
