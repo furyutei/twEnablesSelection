@@ -2,7 +2,7 @@
 // @name            twEnablesSelection
 // @namespace       http://d.hatena.ne.jp/furyu-tei
 // @author          furyu
-// @version         0.1.0.3
+// @version         0.1.0.4
 // @include         http://twitter.com/*
 // @include         https://twitter.com/*
 // @description     enables selection of text on Twitter
@@ -22,18 +22,15 @@ var main = function(w, d){
     var OVERRIDE_MOUSE_OPERATION = true;
     
     var TWEET_TEXT_ONLY = true;
+    var COPY_SELECTED_TEXT_TO_SEARCH_FORM = false;
     
     var log = function(object) {
         if (!DEBUG) return;
         console.error('['+new Date().toISOString()+']', object);
     };
     
-    var NAME_SCRIPT = 'twEnablesSelection';
-    var $=w.$;
-    if (w[NAME_SCRIPT+'_touched']) return;
-    if (!$) {
-        var main = arguments.callee; setTimeout(function(){main(w,d);}, 100); return;
-    }
+    var NAME_SCRIPT = 'twEnablesSelection'; if (w[NAME_SCRIPT+'_touched']) return;
+    var $=w.$; if (!$) {var main = arguments.callee; setTimeout(function(){main(w,d);}, 100); return;}
     log('*** '+  NAME_SCRIPT +' start');
     w[NAME_SCRIPT+'_touched'] = true;
     
@@ -64,8 +61,13 @@ var main = function(w, d){
     
     var override = function(event){
         log('** mouseup event ** class='+$(event.target).attr('class'));
+        
+        var selected_text = get_selected_text();
+        if (!selected_text) return;
+        if (COPY_SELECTED_TEXT_TO_SEARCH_FORM) $('input#search-query').val(selected_text);
+        
         var jq_target = $(event.target);
-        if ((TWEET_TEXT_ONLY && !jq_target.hasClass('js-tweet-text') && jq_target.parents('.js-tweet-text').size() <= 0) || !get_selected_text()) return;
+        if ((TWEET_TEXT_ONLY && !jq_target.hasClass('js-tweet-text') && jq_target.parents('.js-tweet-text').size() <= 0)) return;
         
         $('div[role="main"], div#page-container').each(function(){
             var jq_container=$(this), container=jq_container.get(0);
