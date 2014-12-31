@@ -2,7 +2,7 @@
 // @name            twEnablesSelection
 // @namespace       http://d.hatena.ne.jp/furyu-tei
 // @author          furyu
-// @version         0.1.0.4
+// @version         0.1.0.5
 // @include         http://twitter.com/*
 // @include         https://twitter.com/*
 // @description     enables selection of text on Twitter
@@ -64,10 +64,11 @@ var main = function(w, d){
         
         var selected_text = get_selected_text();
         if (!selected_text) return;
-        if (COPY_SELECTED_TEXT_TO_SEARCH_FORM) $('input#search-query').val(selected_text);
         
         var jq_target = $(event.target);
         if ((TWEET_TEXT_ONLY && !jq_target.hasClass('js-tweet-text') && jq_target.parents('.js-tweet-text').size() <= 0)) return;
+        
+        if (COPY_SELECTED_TEXT_TO_SEARCH_FORM) $('input#search-query').val(selected_text);
         
         $('div[role="main"], div#page-container').each(function(){
             var jq_container=$(this), container=jq_container.get(0);
