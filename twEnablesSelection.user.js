@@ -2,9 +2,10 @@
 // @name            twEnablesSelection
 // @namespace       http://d.hatena.ne.jp/furyu-tei
 // @author          furyu
-// @version         0.1.0.5
+// @version         0.1.0.6
 // @include         http://twitter.com/*
 // @include         https://twitter.com/*
+// @exclude         https://twitter.com/i/*
 // @description     enables selection of text on Twitter
 // ==/UserScript==
 /*
