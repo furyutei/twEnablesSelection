@@ -2,7 +2,7 @@
 // @name            twEnablesSelection
 // @namespace       http://d.hatena.ne.jp/furyu-tei
 // @author          furyu
-// @version         0.1.0.6
+// @version         0.1.0.7
 // @include         http://twitter.com/*
 // @include         https://twitter.com/*
 // @exclude         https://twitter.com/i/*
@@ -45,7 +45,7 @@ var main = function(w, d){
             }
             return scrollTo(to_x, to_y);
         };
-        $(document).scroll(function(){
+        $(d).scroll(function(){
             if (tid_suppress) clearTimeout(tid_suppress);
             tid_suppress = setTimeout(function(){
                 tid_suppress = null;
@@ -71,32 +71,19 @@ var main = function(w, d){
         
         if (COPY_SELECTED_TEXT_TO_SEARCH_FORM) $('input#search-query').val(selected_text);
         
-        $('div[role="main"], div#page-container').each(function(){
-            var jq_container=$(this), container=jq_container.get(0);
-            if (!container) return;
-            
-            var jq_events = $._data(container).events;
-            if (!jq_events || !jq_events.click) return;
-            
-            var handler_number=jq_events.click.length;
-            if (!handler_number) return;
-            
-            var handlers=[], jq_class=jq_container.attr('class');
-            
-            $.each(jq_events.click, function(i, click_event){
-                handlers[handlers.length] = click_event.handler;
-            });
-            var bind_handlers = function(){
-                $.each(handlers, function(i, handler){
-                    jq_container.click(handler)
-                });
-            };
-            jq_container.unbind('click');
-            log('ignored click event: class="' + jq_class + '", handler number: ' + handler_number);
-            setTimeout(bind_handlers, 100);
-        });
+        var onclick = function(event){
+            event.stopPropagation();
+            log('ignored click event');
+        };
+        
+        jq_target.bind('click', onclick);
+        
+        setTimeout(function(){
+            jq_target.unbind('click', onclick);
+            log('restored click event');
+        }, 100);
     };
-    if (OVERRIDE_MOUSE_OPERATION) $(w).mouseup(override);
+    if (OVERRIDE_MOUSE_OPERATION) $('div[role="main"]').mouseup(override);
 
 }   //  end of main()
 
