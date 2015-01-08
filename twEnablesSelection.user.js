@@ -2,10 +2,9 @@
 // @name            twEnablesSelection
 // @namespace       http://d.hatena.ne.jp/furyu-tei
 // @author          furyu
-// @version         0.1.0.7
+// @version         0.1.0.8
 // @include         http://twitter.com/*
 // @include         https://twitter.com/*
-// @exclude         https://twitter.com/i/*
 // @description     enables selection of text on Twitter
 // ==/UserScript==
 /*
@@ -16,6 +15,8 @@ https://github.com/furyutei/twEnablesSelection
 
 (function(w, d){
 
+if (w !== w.parent) return;
+
 var main = function(w, d){
     var DEBUG = false;
     
@@ -25,19 +26,19 @@ var main = function(w, d){
     var TWEET_TEXT_ONLY = true;
     var COPY_SELECTED_TEXT_TO_SEARCH_FORM = false;
     
-    var log = function(object) {
+    var log = function(object){
         if (!DEBUG) return;
         console.error('['+new Date().toISOString()+']', object);
     };
     
     var NAME_SCRIPT = 'twEnablesSelection'; if (w[NAME_SCRIPT+'_touched']) return;
-    var $=w.$; if (!$) {var main = arguments.callee; setTimeout(function(){main(w,d);}, 100); return;}
+    var $=w.$; if (!$) {var main = arguments.callee; setTimeout(function(){main(w, d);}, 100); return;}
     log('*** '+  NAME_SCRIPT +' start');
     w[NAME_SCRIPT+'_touched'] = true;
     
     if (SUPPRESS_FORCE_SCROLLING) {
         var scrollTo = w.scrollTo, tid_suppress = null;
-        w.scrollTo = function(to_x, to_y) {
+        w.scrollTo = function(to_x, to_y){
             log('** scrollTo() ** x=' + to_x + ', y=' + to_y);
             if (tid_suppress) {
                 log('suppress force scrolling: tid=' + tid_suppress);
@@ -76,14 +77,14 @@ var main = function(w, d){
             log('ignored click event');
         };
         
-        jq_target.bind('click', onclick);
+        jq_target.click(onclick);
         
         setTimeout(function(){
             jq_target.unbind('click', onclick);
             log('restored click event');
         }, 100);
     };
-    if (OVERRIDE_MOUSE_OPERATION) $('div[role="main"]').mouseup(override);
+    if (OVERRIDE_MOUSE_OPERATION) $(w).mouseup(override);
 
 }   //  end of main()
 
