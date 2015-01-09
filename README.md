@@ -6,6 +6,13 @@ Twitterのテキストを範囲選択（コピー）可能なようにするユ�
 - 対象ブラウザ： Firefox（[Greasemonkey](https://addons.mozilla.org/ja/firefox/addon/greasemonkey/)が必要）、Google Chrome（[Tampermonkey](https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo?hl=ja)が必要）
 
 
+【注意】
+---
+このスクリプトにより暫定的に対応されていた不具合ですが、2015/01/09にTwitterにより修正された模様です。  
+これにより、本スクリプトはめでたくお役御免と相成りました。  
+インストールされていた方は、アンインストールされることをお勧めいたします。  
+
+
 ■ twEnablesSelectionとは？
 ---
 [公式ウェブ版Twitter](https://twitter.com/) で、2014年12月24日頃に発生したと思われる下記の不具合(?)を暫定的に改善します。  
@@ -13,7 +20,7 @@ Twitterのテキストを範囲選択（コピー）可能なようにするユ�
 - タイムライン上でツイート中のテキストが範囲選択（コピー）できない（クリック扱いとなり、選択解除されてツイート詳細が開閉）→[発生例](https://www.youtube.com/watch?v=hgRO1VUgdLg)  
 - 画像やリプライを含む等して縦に長い個別ツイート画面で不正なスクロールが発生(下にスクロールしようとしても上に戻ってしまう) →[発生例](https://www.youtube.com/watch?v=6W5OlSoZl5I)  
 
-公式で対応されたら無意味となってしまう、はかないスクリプトです。  
+公式で対応されたら無意味となってしまう、はかないスクリプトです→本当にはかなかった。  
 
 
 ■ インストール方法

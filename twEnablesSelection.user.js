@@ -2,10 +2,10 @@
 // @name            twEnablesSelection
 // @namespace       http://d.hatena.ne.jp/furyu-tei
 // @author          furyu
-// @version         0.1.0.8
+// @version         0.1.0.9
 // @include         http://twitter.com/*
 // @include         https://twitter.com/*
-// @description     enables selection of text on Twitter
+// @description     enables selection of text on Twitter => disused (2015/01/09)
 // ==/UserScript==
 /*
 The MIT License (MIT)
@@ -14,6 +14,8 @@ https://github.com/furyutei/twEnablesSelection
 */
 
 (function(w, d){
+
+return; //  exit (these problems were fixed  by Twitter on January 9, 2015)
 
 if (w !== w.parent) return;
 
@@ -68,20 +70,30 @@ var main = function(w, d){
         if (!selected_text) return;
         
         var jq_target = $(event.target);
-        if ((TWEET_TEXT_ONLY && !jq_target.hasClass('js-tweet-text') && jq_target.parents('.js-tweet-text').size() <= 0)) return;
+        
+        if (TWEET_TEXT_ONLY) {
+            //var target_selector = '.js-tweet-text';
+            var target_selector = '.tweet, .js-stream-tweet';
+            var is_target = (jq_target.is(target_selector)) || (0 < jq_target.parents(target_selector).size());
+            log(target_selector + ' => ' + is_target);
+            if (!is_target) return;
+        }
         
         if (COPY_SELECTED_TEXT_TO_SEARCH_FORM) $('input#search-query').val(selected_text);
         
         var onclick = function(event){
+            log('** click event ** class='+$(event.target).attr('class'));
             event.stopPropagation();
-            log('ignored click event');
+            //jq_target.unbind('click', onclick); // click event may not be fired in some cases
+            log('-> ignored');
         };
         
         jq_target.click(onclick);
+        log('bind click event');
         
         setTimeout(function(){
             jq_target.unbind('click', onclick);
-            log('restored click event');
+            log('unbind click event');
         }, 100);
     };
     if (OVERRIDE_MOUSE_OPERATION) $(w).mouseup(override);
